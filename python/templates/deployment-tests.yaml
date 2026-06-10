@@ -1,0 +1,1 @@
+{{- template "hmcts.deployment-tests.v2.tpl" . -}}
