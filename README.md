@@ -10,13 +10,13 @@ We will take small PRs and small features to this chart but more complicated nee
 
 This chart adds below templates from [chart-library](https://github.com/hmcts/chart-library/) based on the chosen configuration:
 
-- [Deployment](https://github.com/hmcts/chart-library/tree/master#deployment)
+- [Deployment](https://github.com/hmcts/chart-library/tree/main#deployment)
 - [Keyvault Secrets](https://github.com/hmcts/chart-library#keyvault-secret-csi-volumes)
-- [Horizontal Pod Auto Scaler](https://github.com/hmcts/chart-library/tree/master#hpa-horizontal-pod-auto-scaler)
-- [Ingress](https://github.com/hmcts/chart-library/tree/master#ingress)
-- [Pod Disruption Budget](https://github.com/hmcts/chart-library/tree/master#pod-disruption-budget)
-- [Service](https://github.com/hmcts/chart-library/tree/master#service)
-- [Deployment Tests](https://github.com/hmcts/chart-library/tree/master#smoke-and-functional-tests)
+- [Horizontal Pod Auto Scaler](https://github.com/hmcts/chart-library/tree/main#hpa-horizontal-pod-auto-scaler)
+- [Ingress](https://github.com/hmcts/chart-library/tree/main#ingress)
+- [Pod Disruption Budget](https://github.com/hmcts/chart-library/tree/main#pod-disruption-budget)
+- [Service](https://github.com/hmcts/chart-library/tree/main#service)
+- [Deployment Tests](https://github.com/hmcts/chart-library/tree/main#smoke-and-functional-tests)
 
 ## Health Check Convention
 
@@ -78,7 +78,7 @@ keyVaults:
 
 ## Startup probes
 
-Startup probes are defined in the [library template](https://github.com/hmcts/chart-library/tree/master#startup-probes) and should be configured for slow starting applications.
+Startup probes are defined in the [library template](https://github.com/hmcts/chart-library/tree/main#startup-probes) and should be configured for slow starting applications.
 The default values below (defined in the chart) should be sufficient for most Python applications:
 
 ```yaml
@@ -102,7 +102,12 @@ autoscaling:        # Default is true
   enabled: true
   maxReplicas: 5    # Optional, will use replicas + 2 if not set
   minReplicas: 2    # Optional, will use replicas if not set
-  targetCPUUtilizationPercentage: 80 # Default is 80%
+  cpu:
+    enabled: true
+    averageUtilization: 80
+  memory:
+    enabled: true
+    averageUtilization: 80
 ```
 
 ## Postgresql
@@ -183,5 +188,5 @@ Triggered when the repository is tagged (e.g. when a release is created). Also p
 
 ### Releases
 
-We use semantic versioning via GitHub releases to handle new releases of this application chart, this is done via automation called Release Drafter. When you merge a PR to master, a new draft release will be created.
+We use semantic versioning via GitHub releases to handle new releases of this application chart, this is done via automation called Release Drafter. When you merge a PR to main, a new draft release will be created.
 More information is available about the [release process and how to create draft releases for testing purposes in more depth](https://hmcts.github.io/ops-runbooks/Testing-Changes/drafting-a-release.html)
