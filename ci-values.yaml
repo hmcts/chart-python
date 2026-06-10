@@ -1,0 +1,42 @@
+image: 'hmctsprod.azurecr.io/plum/recipe-backend:latest'
+environment:
+  POSTGRES_SSL_MODE: disable
+  POSTGRES_PASSWORD: '{{ .Values.postgresql.auth.password}}'
+  POSTGRES_DATABASE: '{{ .Values.postgresql.auth.database }}'
+  POSTGRES_USER: '{{ .Values.postgresql.auth.username }}'
+  POSTGRES_HOST: '{{ .Release.Name }}-postgresql'
+replicas: 2
+useInterpodAntiAffinity: true
+ingressHost: '{{.Release.Name}}.service.core-compute-preview.internal'
+additionalIngressHosts: ['ci-01.{{.Values.global.environment}}.platform.hmcts.net']
+imagePullPolicy: Always
+configmap:
+  VAR_A: VALUE_A
+  VAR_B: VALUE_B
+secrets:
+  CONNECTION_STRING:
+    secretRef: some-secret-reference
+    key: connectionString
+    disabled: true
+prometheus:
+  enabled: true
+keyVaults:
+  'plumsi':
+    excludeEnvironmentSuffix: false
+    secrets:
+      - test-secret
+postgresql:
+  enabled: true
+  primary:
+    persistence:
+      enabled: false
+    extraVolumes:
+      - name: postgresql-run
+        emptyDir: {}
+    extraVolumeMounts:
+      - name: postgresql-run
+        mountPath: /var/run/postgresql
+global:
+  tenantId: '531ff96d-0ae9-462a-8d2d-bec7c0b42082'
+  environment: aat
+  enableKeyVaults: true

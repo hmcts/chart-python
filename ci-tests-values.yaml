@@ -1,0 +1,42 @@
+aadIdentityName: someId
+
+testsConfig:
+  keyVaults:
+    'cmc':
+      excludeEnvironmentSuffix: false
+      secretRef: 'kvcreds'
+      secrets:
+        smoke-test-citizen-username: SMOKE_TEST_CITIZEN_USER
+        smoke-test-user-password: SMOKE_TEST_CITIZEN_PASS
+  serviceAccountName: tests-service-account
+  environment:
+    TEST_URL: http://plum-recipe-backend-python
+
+smoketests:
+  image: hmctsprod.azurecr.io/python/template-test
+  enabled: true
+  environment:
+    TEST_URL: http://plum-recipe-backend-python-overridden
+
+functionaltests:
+  image: hmctsprod.azurecr.io/python/template-test
+  enabled: true
+
+smoketestscron:
+  schedule: '20 0/3 * * *'
+  image: hmctsprod.azurecr.io/python/template-test
+  enabled: true
+  environment:
+    TEST_URL: http://plum-recipe-backend-python-overridden2
+
+functionaltestscron:
+  schedule: '30 0/6 * * *'
+  image: hmctsprod.azurecr.io/python/template-test
+  enabled: true
+  environment:
+    TEST_URL: http://plum-recipe-backend-python-overridden2
+    SOME_ENV: some-val
+  memoryRequests: '512Mi'
+  cpuRequests: '300m'
+  memoryLimits: '2048Mi'
+  cpuLimits: '2000m'
