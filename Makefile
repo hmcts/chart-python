@@ -38,4 +38,4 @@ test:
 
 all: setup clean lint deploy test
 
-.PHONY: setup clean lint deploy test all
+.PHONY: setup clean lint template deploy dry-run test all
