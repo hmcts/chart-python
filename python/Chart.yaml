@@ -6,7 +6,7 @@ name: python
 version: 0.1.0 # Do not change
 appVersion: 0.1.0 # Do not change
 type: application
-icon: https://github.com/hmcts/chart-python/raw/master/images/icons8-python-50.png
+icon: https://github.com/hmcts/chart-python/raw/main/images/icons8-python-50.png
 keywords:
   - python
   - fastapi
