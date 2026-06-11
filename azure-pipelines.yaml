@@ -2,47 +2,47 @@ name: chart-python pipeline
 trigger:
   branches:
     include:
-    - refs/tags/*
+      - refs/tags/*
 pr:
   branches:
     include:
-    - main
+      - main
 resources:
   repositories:
-  - repository: cnp-azuredevops-libraries
-    type: github
-    ref: refs/heads/master
-    name: hmcts/cnp-azuredevops-libraries
-    endpoint: 'hmcts'
+    - repository: cnp-azuredevops-libraries
+      type: github
+      ref: refs/heads/master
+      name: hmcts/cnp-azuredevops-libraries
+      endpoint: "hmcts"
 
 variables:
   - name: agentPool
     value: ubuntu-latest
 
 jobs:
-- job: Validate
-  pool:
-    vmImage: ${{ variables.agentPool }}
-  steps:
-  - template: steps/charts/validate.yaml@cnp-azuredevops-libraries
-    parameters:
-      chartName: python
-      chartReleaseName: chart-python-ci-test
-      chartNamespace: chart-tests
-      helmInstallTimeout: '500'
+  - job: Validate
+    pool:
+      vmImage: ${{ variables.agentPool }}
+    steps:
+      - template: steps/charts/validate.yaml@cnp-azuredevops-libraries
+        parameters:
+          chartName: python
+          chartReleaseName: chart-python-ci-test
+          chartNamespace: chart-tests
+          helmInstallTimeout: "500"
 
-- job: Release
-  condition: >
-    and(
-        succeeded(),
-        startsWith(variables['Build.SourceBranch'], 'refs/tags/')
-      )
-  dependsOn: Validate
-  pool:
-    vmImage: ${{ variables.agentPool }}
-  steps:
-  - template: steps/charts/release.yaml@cnp-azuredevops-libraries
-    parameters:
-      chartName: python
-      chartReleaseName: chart-python
-      chartNamespace: chart-tests
+  - job: Release
+    condition: >
+      and(
+          succeeded(),
+          startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+        )
+    dependsOn: Validate
+    pool:
+      vmImage: ${{ variables.agentPool }}
+    steps:
+      - template: steps/charts/release.yaml@cnp-azuredevops-libraries
+        parameters:
+          chartName: python
+          chartReleaseName: chart-python
+          chartNamespace: chart-tests
