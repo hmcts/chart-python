@@ -1,4 +1,4 @@
-image: 'hmctsprod.azurecr.io/plum/fast-api-test:latest'
+image: "hmctsprod.azurecr.io/plum/fast-api-test:latest"
 environment:
   POSTGRES_SSL_MODE: disable
   POSTGRES_PASSWORD: "{{ .Values.postgresql.auth.password}}"
@@ -22,7 +22,7 @@ secrets:
 prometheus:
   enabled: true
 keyVaults:
-  "plumsi": # Replace with the Python test key vault
+  "plumsi":
     excludeEnvironmentSuffix: false
     secrets:
       - test-secret
