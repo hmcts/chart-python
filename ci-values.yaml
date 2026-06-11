@@ -1,14 +1,15 @@
-image: 'hmctsprod.azurecr.io/plum/recipe-backend:latest'
+image: "hmctsprod.azurecr.io/plum/recipe-backend:latest" # Replace with our Python test image
 environment:
   POSTGRES_SSL_MODE: disable
-  POSTGRES_PASSWORD: '{{ .Values.postgresql.auth.password}}'
-  POSTGRES_DATABASE: '{{ .Values.postgresql.auth.database }}'
-  POSTGRES_USER: '{{ .Values.postgresql.auth.username }}'
-  POSTGRES_HOST: '{{ .Release.Name }}-postgresql'
+  POSTGRES_PASSWORD: "{{ .Values.postgresql.auth.password}}"
+  POSTGRES_DATABASE: "{{ .Values.postgresql.auth.database }}"
+  POSTGRES_USER: "{{ .Values.postgresql.auth.username }}"
+  POSTGRES_HOST: "{{ .Release.Name }}-postgresql"
 replicas: 2
 useInterpodAntiAffinity: true
-ingressHost: '{{.Release.Name}}.service.core-compute-preview.internal'
-additionalIngressHosts: ['ci-01.{{.Values.global.environment}}.platform.hmcts.net']
+ingressHost: "{{.Release.Name}}.service.core-compute-preview.internal"
+additionalIngressHosts:
+  ["ci-01.{{.Values.global.environment}}.platform.hmcts.net"]
 imagePullPolicy: Always
 configmap:
   VAR_A: VALUE_A
@@ -21,7 +22,7 @@ secrets:
 prometheus:
   enabled: true
 keyVaults:
-  'plumsi':
+  "plumsi": # Replace with the Python test key vault
     excludeEnvironmentSuffix: false
     secrets:
       - test-secret
@@ -37,6 +38,6 @@ postgresql:
       - name: postgresql-run
         mountPath: /var/run/postgresql
 global:
-  tenantId: '531ff96d-0ae9-462a-8d2d-bec7c0b42082'
+  tenantId: "531ff96d-0ae9-462a-8d2d-bec7c0b42082"
   environment: aat
   enableKeyVaults: true
