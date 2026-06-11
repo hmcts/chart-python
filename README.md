@@ -1,6 +1,6 @@
 # chart-python
 
-[![Build Status](https://dev.azure.com/hmcts/CNP/_apis/build/status/Helm%20Charts/chart-python)](https://dev.azure.com/hmcts/CNP/_build/latest?definitionId=TBD)
+[![Build Status](https://dev.azure.com/hmcts/PlatformOperations/_apis/build/status/1229)](https://dev.azure.com/hmcts/PlatformOperations/_build?definitionId=1229&_a=summary)
 
 This chart is intended for simple Python microservices.
 
