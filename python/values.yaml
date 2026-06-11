@@ -68,34 +68,9 @@ postgresql:
 global:
   enableKeyVaults: false
   devMode: false
-  smoketestscron:
-    enabled: true
-  functionaltestscron:
-    enabled: true
 prometheus:
   enabled: false
   path: /prometheus
-
-testsConfig:
-  memoryRequests: '256Mi'
-  cpuRequests: '100m'
-  memoryLimits: '2048Mi'
-  cpuLimits: '1000m'
-  serviceAccountName: tests-service-account
-smoketests:
-  image: hmctsprod.azurecr.io/python/template
-  enabled: false
-functionaltests:
-  image: hmctsprod.azurecr.io/python/template
-  enabled: false
-smoketestscron:
-  image: hmctsprod.azurecr.io/python/template
-  enabled: false
-  schedule: '20 0/1 * * *'
-functionaltestscron:
-  image: hmctsprod.azurecr.io/python/template
-  enabled: false
-  schedule: '30 0/6 * * *'
 
 # HPA - example
 # autoscaling:

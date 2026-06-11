@@ -16,7 +16,7 @@ This chart adds below templates from [chart-library](https://github.com/hmcts/ch
 - [Ingress](https://github.com/hmcts/chart-library/tree/master#ingress)
 - [Pod Disruption Budget](https://github.com/hmcts/chart-library/tree/master#pod-disruption-budget)
 - [Service](https://github.com/hmcts/chart-library/tree/master#service)
-- [Deployment Tests](https://github.com/hmcts/chart-library/tree/master#smoke-and-functional-tests)
+
 
 ## Health Check Convention
 
@@ -126,43 +126,6 @@ postgresql:
   enabled: true
 ```
 
-## Smoke and functional tests
-
-From this chart you can configure your functional and smoke tests to run just after deployment or at scheduled times
-as cron jobs.
-
-```yaml
-python:
-  testsConfig:
-    keyVaults:
-      my-vault:
-        excludeEnvironmentSuffix: false
-        secretRef: "kvcreds"
-        secrets:
-          my-secret: MY_SECRET_ENV_VAR
-    environment:
-      TEST_URL: http://my-python-service
-      SLACK_CHANNEL: "platops-build-notices"
-      SLACK_NOTIFY_SUCCESS: "true"
-      CLUSTER_NAME: "aat-01-aks"
-
-  smoketests:
-    image: hmctsprod.azurecr.io/python/template-test
-    enabled: true
-
-  functionaltests:
-    image: hmctsprod.azurecr.io/python/template-test
-    enabled: true
-
-  smoketestscron:
-    image: hmctsprod.azurecr.io/python/template-test
-    enabled: true
-
-  functionaltestscron:
-    image: hmctsprod.azurecr.io/python/template-test
-    enabled: true
-```
-
 ## Development and Testing
 
 Default configuration (e.g. default image and ingress host) is set up for preview. This is suitable for local development and testing.
@@ -172,15 +135,13 @@ Default configuration (e.g. default image and ingress host) is set up for previe
 - To execute an end-to-end build, deploy and test run `make`.
 - To clean up deployed releases, charts, test pods and local charts, run `make clean`
 
-`helm test` will deploy a busybox container alongside the release which performs a simple HTTP request against the service health endpoint. If it doesn't return `HTTP 200` the test will fail. **NOTE:** it does NOT run with `--cleanup` so the test pod will be available for inspection.
-
 ## Azure DevOps Builds
 
 Builds are run against the 'nonprod' AKS cluster.
 
 ### Pull Request Validation
 
-A build is triggered when pull requests are created. This build will run `helm lint`, deploy the chart using `ci-values.yaml` and run `helm test`.
+A build is triggered when pull requests are created. This build will run `helm lint` and deploy the chart using `ci-values.yaml`.
 
 ### Release Build
 
