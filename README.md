@@ -137,7 +137,7 @@ Default configuration (e.g. default image and ingress host) is set up for previe
 
 ## Azure DevOps Builds
 
-Builds are run against the 'nonprod' AKS cluster.
+Builds are run against the CFT Preview AKS cluster (`cft-preview-00-aks` / `cft-preview-01-aks`), whichever is active.
 
 ### Pull Request Validation
 
