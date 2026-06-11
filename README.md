@@ -65,17 +65,6 @@ keyVaults:
 applicationInsightsInstrumentKey: "some-key"
 ```
 
-If you wish to use pod identity for accessing the key vaults instead of a service principal you need to set a flag `aadIdentityName: <identity-name>`
-e.g.
-```yaml
-aadIdentityName: my-service
-keyVaults:
-  "my-vault":
-    usePodIdentity: true
-    secrets:
-      - my-secret-key
-```
-
 ## Startup probes
 
 Startup probes are defined in the [library template](https://github.com/hmcts/chart-library/tree/master#startup-probes) and should be configured for slow starting applications.

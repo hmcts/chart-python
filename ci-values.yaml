@@ -1,4 +1,4 @@
-image: "hmctsprod.azurecr.io/plum/recipe-backend:latest" # Replace with our Python test image
+image: 'hmctsprod.azurecr.io/plum/fast-api-test:latest'
 environment:
   POSTGRES_SSL_MODE: disable
   POSTGRES_PASSWORD: "{{ .Values.postgresql.auth.password}}"

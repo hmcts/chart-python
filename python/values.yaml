@@ -3,24 +3,24 @@ imagePullPolicy: IfNotPresent
 replicas: 1
 registerAdditionalDns:
   enabled: false
-memoryRequests: '256Mi'
-cpuRequests: '100m'
-memoryLimits: '512Mi'
-cpuLimits: '1000m'
-devmemoryRequests: '256Mi'
-devcpuRequests: '100m'
-devmemoryLimits: '512Mi'
-devcpuLimits: '1000m'
-readinessPath: '/health/readiness'
+memoryRequests: "256Mi"
+cpuRequests: "100m"
+memoryLimits: "512Mi"
+cpuLimits: "1000m"
+devmemoryRequests: "256Mi"
+devcpuRequests: "100m"
+devmemoryLimits: "512Mi"
+devcpuLimits: "1000m"
+readinessPath: "/health/readiness"
 readinessDelay: 0
 readinessTimeout: 3
 readinessPeriod: 15
-livenessPath: '/health/liveness'
+livenessPath: "/health/liveness"
 livenessDelay: 0
 livenessTimeout: 3
 livenessPeriod: 15
 livenessFailureThreshold: 3
-startupPath: '/health/liveness'
+startupPath: "/health/liveness"
 startupDelay: 10
 startupTimeout: 3
 startupPeriod: 10
@@ -29,7 +29,7 @@ saEnabled: true
 spotInstances:
   enabled: false
 devApplicationInsightsInstrumentKeyName: AZURE_APPLICATIONINSIGHTS_INSTRUMENTATIONKEY
-devApplicationInsightsInstrumentKey: '00000000-0000-0000-0000-000000000000'
+devApplicationInsightsInstrumentKey: "00000000-0000-0000-0000-000000000000"
 useInterpodAntiAffinity: true
 ingressClass: traefik
 disableTraefikTls: true
@@ -39,7 +39,7 @@ ingressSessionAffinity:
   enabled: false
   sessionCookieName: sticky
 dnsConfig:
-  ndots: '3'
+  ndots: "3"
   singleRequestTcp: false
 pdb:
   enabled: true
@@ -50,9 +50,9 @@ pdb:
 
 postgresql:
   image:
-    registry: hmctspublic.azurecr.io
+    registry: hmctsprod.azurecr.io
     repository: imported/bitnami/postgresql
-    tag: '15.0.0'
+    tag: "15.0.0"
   ## Whether to deploy the Postgres Chart or not
   enabled: false
   ## Default Postgres Configuration parameters
