@@ -1,6 +1,6 @@
 # chart-python
 
-[![Build Status](https://dev.azure.com/hmcts/CNP/_apis/build/status/Helm%20Charts/chart-python)](https://dev.azure.com/hmcts/CNP/_build/latest?definitionId=TBD)
+[![Build Status](https://dev.azure.com/hmcts/PlatformOperations/_apis/build/status/1229)](https://dev.azure.com/hmcts/PlatformOperations/_build?definitionId=1229&_a=summary)
 
 This chart is intended for simple Python microservices.
 
@@ -65,17 +65,6 @@ keyVaults:
 applicationInsightsInstrumentKey: "some-key"
 ```
 
-If you wish to use pod identity for accessing the key vaults instead of a service principal you need to set a flag `aadIdentityName: <identity-name>`
-e.g.
-```yaml
-aadIdentityName: my-service
-keyVaults:
-  "my-vault":
-    usePodIdentity: true
-    secrets:
-      - my-secret-key
-```
-
 ## Startup probes
 
 Startup probes are defined in the [library template](https://github.com/hmcts/chart-library/tree/master#startup-probes) and should be configured for slow starting applications.
@@ -137,7 +126,7 @@ Default configuration (e.g. default image and ingress host) is set up for previe
 
 ## Azure DevOps Builds
 
-Builds are run against the 'nonprod' AKS cluster.
+Builds are run against the CFT Preview AKS cluster (`cft-preview-00-aks` / `cft-preview-01-aks`), whichever is active.
 
 ### Pull Request Validation
 
