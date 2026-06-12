@@ -20,17 +20,16 @@ variables:
     value: ubuntu-latest
 
 jobs:
-  # Validate job temporarily disabled until a test application image is available
-  # - job: Validate
-  #   pool:
-  #     vmImage: ${{ variables.agentPool }}
-  #   steps:
-  #     - template: steps/charts/validate.yaml@cnp-azuredevops-libraries
-  #       parameters:
-  #         chartName: python
-  #         chartReleaseName: chart-python-ci-test
-  #         chartNamespace: chart-tests
-  #         helmInstallTimeout: "500"
+  - job: Validate
+    pool:
+      vmImage: ${{ variables.agentPool }}
+    steps:
+      - template: steps/charts/validate.yaml@cnp-azuredevops-libraries
+        parameters:
+          chartName: python
+          chartReleaseName: chart-python-ci-test
+          chartNamespace: chart-tests
+          helmInstallTimeout: "500"
 
   - job: Release
     condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
